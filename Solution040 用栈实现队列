@@ -1,0 +1,44 @@
+public class MyQueue {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+    
+    public MyQueue() {
+        // do intialization if necessary
+    }
+
+    /*
+     * @param element: An integer
+     * @return: nothing
+     * 思路：建立两个Integer型的空栈，push添加元素，pop删除元素。push方法stack1进栈添加元素，当stack2不为空时，stack2出栈stack1进栈，放进stack1中。
+     * pop删除元素，当stack1不为空，stack1开始出栈，stack2进栈，并返回stack2删除的元素数。继续stack2进栈，进完了以后返回stack2的peek(),top()栈顶元素不移除
+     */
+    public void push(int element) {
+        // write your code here
+        while(!stack2.isEmpty()){
+            stack1.push(stack2.pop());
+        }
+        stack1.push(element);
+    }
+
+    /*
+     * @return: An integer
+     */
+    public int pop() {
+        // write your code here
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+        }
+        return stack2.pop();
+    }
+
+    /*
+     * @return: An integer
+     */
+    public int top() {
+        // write your code here
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+        }
+        return stack2.peek();
+    }
+}
