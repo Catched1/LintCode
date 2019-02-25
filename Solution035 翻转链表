@@ -1,0 +1,35 @@
+/**
+ * Definition for ListNode
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param head: n
+     * @return: The new head of reversed linked list.
+     * 思路：prev指向空，head指向第一个数。把head.next指向temp，head和head.nex断开。head.next向左指向prev，然后head和prev开始右移，翻转下一个数
+     * 所以prev=head，head=head.next。最后head指向了null，prev指向了完整的反转链表
+     */
+    public ListNode reverse(ListNode head) {
+        // write your code here
+        ListNode prev = null;
+        while(head != null){
+            //把temp指向head.next，head和head.next断开
+            ListNode temp = head.next;
+            //head.next向左指向prev
+            head.next = prev;
+            //prev右移指向(占据)head的位置
+            prev = head;
+            ////head右移指向(占据)head.next的位置
+            head = temp;
+        }
+        return prev;//最后head指向了null，prev指向了完整的反转链表
+    }
+}
