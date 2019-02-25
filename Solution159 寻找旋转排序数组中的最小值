@@ -1,0 +1,26 @@
+public class Solution {
+    /**
+     * @param nums: a rotated sorted array
+     * @return: the minimum number in the array
+     * 思路：先判断数组里的值是否为空，为空返回-1.然后对数组里的数进行循环查找，采用折半查找，最后当start+1等于或者大于end时，查询结束返回最小值。
+     */
+    public int findMin(int[] nums) {
+        if (nums == null || nums.length == 0) return -1;
+        if (nums.length == 1) return nums[0];
+        
+        int start = 0;
+        int end = nums.length - 1;
+        
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] > nums[end]) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+       
+        }
+        
+        return nums[start] < nums[end] ? nums[start] : nums[end];
+    }
+}
