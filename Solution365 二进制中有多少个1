@@ -1,0 +1,18 @@
+public class Solution {
+    /*
+     * @param num: An integer
+     * @return: An integer
+     * 思路：定义二进制整数p=1，与目标数进行与（&）操作，从右到左，如果与操作为真，说明遇到了1.否则p继续向左。直到p“与”不到任何数，为0，结束。
+     */
+    public int countOnes(int num) {
+        int count = 0;
+        int p = 1;
+        while (p != 0) {
+            if ((num & p) != 0) {
+                count++;
+            } 
+            p = p << 1;
+        }
+        return count;
+    }
+};
