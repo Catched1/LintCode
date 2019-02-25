@@ -1,0 +1,12 @@
+Solution37.反转一个3位的整数
+public class Solution {
+    /**
+     * @param number: A 3-digit number.
+     * @return: Reversed number.
+     * 思路：通过/10和%10取余的方式，获取3位整数上的每位数字，%10取余得个位上数字，再*10*10变成百位上的数字；/10再%10得十位上数字，再*10反转后还是十位上
+     * 数字； /10/10再%10得百位上数字，反转后成为个位上数字。
+     */
+    public int reverseInteger(int number) {
+        return number%10*10*10 + number/10%10*10 + number/10/10%10;
+    }
+}
