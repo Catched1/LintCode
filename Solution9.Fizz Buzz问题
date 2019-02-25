@@ -1,0 +1,23 @@
+public class Solution {
+    /**
+     * @param n: An integer
+     * @return: A list of strings.
+     * 思路：建立一个数组存放n，对整数n进行判断，能被3和5整除，肯定能被15整除，分别考虑被3整除，和被5整除。如果能被3和5整除，转化为字符串输出
+     */
+    public ArrayList<String> fizzBuzz(int n) {
+        ArrayList<String> results = new ArrayList<String>();
+        for(int i=1; i<=n; i++){
+            //能同时被3和5整除的数，也肯定能被5整除，能被3整除，所以先考虑能被15整除的数
+            if(0 == i%15){
+                results.add("fizz buzz");
+            }else if(0 == i%5){
+                results.add("buzz");
+            }else if(0 == i%3){
+                results.add("fizz");
+            }else{
+                results.add(String.valueOf(i));
+            }
+        }
+        return results;
+    }
+}
