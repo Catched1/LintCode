@@ -1,0 +1,44 @@
+/**
+ * Definition for ListNode
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param l1: ListNode l1 is the head of the linked list
+     * @param l2: ListNode l2 is the head of the linked list
+     * @return: ListNode head of linked list
+     * 思路：与合并数组一个方法，两个指针往后走。双指针：在遍历对象的过程中，不是使用单个指针进行王文，二是使用两个相同方向或者相反方向的进行遍历。
+     * 双指针的使用可以降低程序时间和空间复杂度。(注：这里所说的指针，并不是C/C++中指针的概念，而是指索引，游标或指针，可迭代对象等)
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // write your code here
+        ListNode dummy = new ListNode(0);
+        ListNode lastNode = dummy;
+        
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                lastNode.next = l1;
+                l1 = l1.next;
+            }else{
+                lastNode.next = l2;
+                l2 = l2.next;
+            }
+            lastNode = lastNode.next;
+        }
+        
+        if(l1 != null){
+            lastNode.next = l1;
+        }else{
+            lastNode.next = l2;
+        }
+        return dummy.next;
+    }
+}
