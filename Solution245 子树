@@ -1,0 +1,49 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param T1: The roots of binary tree T1.
+     * @param T2: The roots of binary tree T2.
+     * @return: True if T2 is a subtree of T1, or false.
+     * 注意事项：若 T1 中存在从节点 n 开始的子树与 T2 相同，我们称 T2 是 T1 的子树。也就是说，如果在 T1 节点 n 处将树砍断，砍断的部分将与 T2 完全相同。
+     * 思路：因为T2为T1的子树，子树限定了集中情况：T1=T2(包括T1.left==T2.left,T1.right==T2.right全相等)，T1.left=T2(T1左子树等于T2)，
+     * T1.right==T2(T1右子树等于T2），其中排除T1的右子树等于T2的左子树（只有左子树），T1的左子树等于T2的右子树（只有右子树）。
+     * 按照这个思路，先判断T1和T2是否相同，定义一个方法判断isEqual。然后再以(T1.left,T2),(T1.right,T2)为参数进行判断。
+     */
+    public boolean isSubtree(TreeNode T1, TreeNode T2) {
+        // write your code here
+        if(T2 == null){
+            return true;
+        }
+        if(T1 == null){
+            return false;
+        }
+        if(isEqual(T1,T2)){
+            return true;
+        }
+        if(isSubtree(T1.left,T2) || isSubtree(T1.right,T2)){
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean isEqual(TreeNode T1, TreeNode T2){
+        if(T1 == null || T2 == null){
+            return T1 == T2;
+        }
+        if(T1.val != T2.val){
+            return false;
+        }
+        return isEqual(T1.left,T2.left) && isEqual(T1.right,T2.right);
+    }
+}
