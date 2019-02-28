@@ -1,0 +1,31 @@
+public class Solution {
+    /**
+     * @param n: An integer
+     * @return: An array storing 1 to the largest number with n digits.
+     * 思路：采用递归的方式打印，递归就是直接过着间接调用自己的算法。对于要求打印从1到最大的N位整数，是从第1位打印“从1到最大的N位整数”，第2位打印“从1到最大的N位整数”，
+     * 一直到第n位打印“从1到最大的N位整数”。
+     */
+    public List<Integer> numbersByRecursion(int n) {
+        // write your code here
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        num(n,0,res);
+        return res;
+    }
+    
+    public void num(int n, int ans, ArrayList<Integer> res){
+        //把第一位添加到res数组
+        if(n == 0){
+            if(ans > 0){
+                res.add(ans);
+            }
+            return;
+        }
+        
+        //当n>=2时开始采用for循环
+        int i;
+        for(i=0; i<=9; i++){
+            num(n-1, ans*10+i, res);
+        }
+     
+    }
+}
