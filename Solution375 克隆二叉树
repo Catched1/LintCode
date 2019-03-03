@@ -1,0 +1,27 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param root: The root of binary tree
+     * @return: root of new tree
+     * 思路：新建一个克隆的方法，把输入的目标二叉树输入，然后在方法里创建TreeNode对象，把目标二叉树的根节点值、左子树、右子树的值分别等于克隆二叉树
+     */
+    public TreeNode cloneTree(TreeNode root) {
+        // write your code here
+        if(root == null) return null;
+        TreeNode clone_root = new TreeNode(root.val);
+        clone_root.left = cloneTree(root.left);
+        clone_root.right = cloneTree(root.right);
+        return clone_root;
+    }
+}
