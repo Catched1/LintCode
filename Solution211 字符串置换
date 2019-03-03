@@ -1,0 +1,25 @@
+public class Solution {
+    /**
+     * @param A: a string
+     * @param B: a string
+     * @return: a boolean
+     * 思路：如果两个字符串中有一个为null，为false;如果两个字符串的长度不一样，也是false。接着，把两个string字符串转换为两个char数组，
+     * 然后采用charAt方法，把A、B字符串分别加载进chars1、chars2数组，判断chars1和chars2数组是否相等。
+     */
+    public boolean Permutation(String A, String B) {
+        // write your code here
+        if(A == null || B == null) return A==B;
+        if(A.length() != B.length()) return false;
+        char[] chars1 = new char[256];
+        char[] chars2 = new char[256];
+        for(int i=0; i<A.length(); i++){
+            chars1[A.charAt(i)] ++;
+            chars2[B.charAt(i)] ++;
+        }
+        
+        for(int i=0; i<chars1.length; i++){
+            if(chars1[i] != chars2[i]) return false;
+        }
+        return true;
+    }
+}
