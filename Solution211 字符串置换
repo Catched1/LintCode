@@ -59,7 +59,7 @@ public class Solution {
             }
         }
         
-        //将Map中所有的键存入到set集合中,再根据get方法。获取每一个键对应的值
+        //将Map中所有的键存入到set集合中,再根据get方法。获取每一个键对应的值.
         for(Character word : map.keySet()){
             if(map.get(word) != 0 )
                 //最后哈希表中的value值都为0时代表B与A互为变形词
