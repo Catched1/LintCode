@@ -1,3 +1,4 @@
+version1:数组形式
 public class Solution {
     /**
      * @param A: a string
@@ -19,6 +20,50 @@ public class Solution {
         
         for(int i=0; i<chars1.length; i++){
             if(chars1[i] != chars2[i]) return false;
+        }
+        return true;
+    }
+}
+
+version2：采用hashMap
+public class Solution {
+    /**
+     * @param A: a string
+     * @param B: a string
+     * @return: a boolean
+     */
+    public boolean Permutation(String A, String B) {
+        // write your code here
+        if(A.length() == 0 || B.length() == 0) return false;
+        if(A.length() != B.length()) return false;
+        
+        Map<Character,Integer> map = new HashMap<>();
+        
+        //将字符串A放入哈希表中，key为字符，value为该字符出现的次数
+        for(int i=0; i<A.length(); i++){//A字符串的长度为4，i<4
+            //charAt()返回指定索引处的字符，通过A.charAt(i)把字符a、b、c、d分别作为key，value=1
+            map.merge(A.charAt(i), 1, Integer::sum);//charAt()返回指定索引处的字符a、b、c、d
+        }
+        
+        //然后依次扫描B，更新哈希表次数。
+        for(int i=0; i<B.length(); i++){
+            /*
+            get方法调用：当调用get方法时会调用hash函数，这个hash函数会将key的hashCode值返回，返回的hashCode与
+            Entry数组长度-1进行逻辑与运算得到一个index值，用这个index值来确定数据存储在Entry数组当中的位置 
+            */
+            if(map.get(B.charAt(i)) != null && map.get(B.charAt(i)) >0){
+                //扫描B，把字符串B存进map，字符b、c、d、a分别作为key，value=B的index值-1
+                map.put(B.charAt(i), map.get(B.charAt(i))-1);
+            }else{
+                return false;
+            }
+        }
+        
+        //将Map中所有的键存入到set集合中,再根据get方法。获取每一个键对应的值
+        for(Character word : map.keySet()){
+            if(map.get(word) != 0 )
+                //最后哈希表中的value值都为0时代表B与A互为变形词
+                return false;
         }
         return true;
     }
