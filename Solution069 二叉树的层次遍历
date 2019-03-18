@@ -157,8 +157,7 @@ public class Solution {
             if (node.right != null) {
                 Q.offer(node.right);
             }
-        }
-        
+        }  
         return result;
     }
 }
