@@ -1,0 +1,65 @@
+version1：模拟
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List ans = new ArrayList();    //存储结果
+        if (matrix.length == 0) return ans;
+       
+        int R = matrix.length, C = matrix[0].length;  //R行C列  
+        boolean[][] seen = new boolean[R][C];         //boolean数组用来标记是否被访问过
+ 
+        int[] dr = {0, 1, 0, -1};   //表示方向
+        int[] dc = {1, 0, -1, 0};
+ 
+        int r = 0, c = 0, di = 0;
+ 
+        for (int i = 0; i < R * C; i++) {
+            ans.add(matrix[r][c]);
+            seen[r][c] = true;
+            int cr = r + dr[di];
+            int cc = c + dc[di];
+            if (0 <= cr && cr < R && 0 <= cc && cc < C && !seen[cr][cc]){
+                r = cr;
+                c = cc;
+            } else {
+                di = (di + 1) % 4;
+                r += dr[di];
+                c += dc[di];
+            }
+        }
+        return ans;
+    }
+}
+
+version2：逐层
+class Solution {
+    public List < Integer > spiralOrder(int[][] matrix) {
+        List ans = new ArrayList();   //存储结果
+        if (matrix.length == 0) return ans;
+ 
+        int r1 = 0, 
+            r2 = matrix.length - 1;     //行数
+        int c1 = 0, 
+            c2 = matrix[0].length - 1;  //列数
+ 
+        while (r1 <= r2 && c1 <= c2) {
+            for (int c = c1; c <= c2; c++) {
+                ans.add(matrix[r1][c]);      //将上面的行，向右，加入
+            }
+            for (int r = r1 + 1; r <= r2; r++) {
+                ans.add(matrix[r][c2]);     //将右边的列，向下，加入
+            }
+            
+            if (r1 < r2 && c1 < c2) {
+                for (int c = c2 - 1; c > c1; c--) ans.add(matrix[r2][c]); //将下面的行，向左顺序，加入
+                for (int r = r2; r > r1; r--) ans.add(matrix[r][c1]);     //将左边的列，向行顺序，加入
+            }
+            //进入第次内层
+            r1++;
+            r2--;
+            c1++;
+            c2--;
+        }
+        return ans;
+    }
+}
